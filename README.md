@@ -1,14 +1,16 @@
 # Magma ECIES
 
-On the HN(Home Network) side, first, a **Key Pair**(HN Public Key and HN Private Key) is generated using Elliptic Curve Algorithm i.e. either `Curve25519/X25519` or `NIST Secp256R1` Elliptic Curve. The HN Public Key shall be stored in the USIM.
+![image](https://user-images.githubusercontent.com/97805339/202318104-e58f49a4-1c76-453f-9765-ef95a6d105cb.png)
+
+On the **HN**(Home Network) side, first, a **Key Pair**(HN Public Key and HN Private Key) is generated using Elliptic Curve Algorithm i.e. either `Curve25519/X25519` or `NIST Secp256R1` Elliptic Curve. The HN Public Key shall be stored in the **USIM**.
 
 **Note:** *The HN Public Key of the network operator is also publicly accessible.*
 
-On the USIM side, similarly, an **Ephemeral Key Pair** is generated using the same `Elliptic Curve Cryptography` but unlike the HN key pair, this pair is intended to use only for a short period time or for a single transaction, that's why it is called Ephemeral Key Pair. The UE Ephemeral Public Key is then shared publicly so that it can be accessible by the HN.
+On the USIM side, similarly, an **Ephemeral Key Pair** is generated using the same `Elliptic Curve Cryptography` but unlike the HN key pair, this pair is intended to use only for a short period of time or for a single transaction, that's why it is called Ephemeral Key Pair. The UE Ephemeral Public Key is then shared publicly so that it can be accessible by the HN.
 
 An `EVP Key Agreement` is established between UE and HN, in which both agree on calculating a **Shared Secret** that can be further used as the basis for a key for some `symmetric encryption algorithm`. This Shared Secret is calculated from the peer's public key and self-private key using `Profile A` or `Profile B` Elliptic Curve Cryptography.
 
-**Note:** *In Magma, this Shared Secret is termed a `Shared Key`*.
+**Note:** *In Magma, this Shared Secret is termed as `Shared Key`*.
 
 After this, a long **Shared Key Stream** is derived on both the UE and HN side from the UE Public Key and the Shared Key using the `KDF ANSI-X9.63` algorithm.
 
